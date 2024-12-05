@@ -20,3 +20,11 @@ const placeholder = function (word) {
     wordInProgress.innerText = placeholderLetters.join("");
 }
 placeholder(word);
+
+//Event listner for Guess! button
+guessButton.addEventListener ("click", function (e) {
+    e.preventDefault();
+    const guess = textInput.value;
+    console.log(guess);
+    textInput.value = "";
+});
