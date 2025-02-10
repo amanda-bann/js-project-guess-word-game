@@ -18,13 +18,33 @@ const placeholder = function (word) {
         placeholderLetters.push("●");
     }
     wordInProgress.innerText = placeholderLetters.join("");
-}
+};
+
 placeholder(word);
 
-//Event listner for Guess! button
+// Event listener for Guess! button
 guessButton.addEventListener ("click", function (e) {
+    //  Prevent reloading of page after button click
     e.preventDefault();
     const guess = textInput.value;
-    console.log(guess);
+    //console.log(guess);
     textInput.value = "";
 });
+
+// Text input checker
+const checkInput = function (input)  {
+    const acceptedLetter = /[a-zA-Z]/;
+    if (input.length === 0) {
+// Message for empty input
+        message.innerText = "Please enter a letter";
+    } else if (input.legth > 1) {
+// Message for more than one letter
+        message.innerText = "Please enter one letter only";
+    } else if (!input.match(acceptedLetter)) {
+// Message for non-letter input
+        message.innerText = "Please enter a letter from A to Z";
+    } else {
+
+        return input;
+    }
+};
