@@ -9,6 +9,7 @@ const playAgainButton = document.querySelector(".play-again");
 
 // Initial word to test the game
 const word = "magnolia";
+const guessedLettersArray = [];
 
 
 // Function to display the symbols as placeholders for the chosen word's letters
@@ -32,6 +33,12 @@ guessButton.addEventListener ("click", function (e) {
     const guess = textInput.value;
     // Input value check
     const legitGuess = checkInput(guess);
+    if (legitGuess) {
+        // If the input is a letter, add it to the guessed letters list
+        makeGuess(guess);
+    }
+    console.log(guess);
+
     textInput.value = "";
 });
 
@@ -41,7 +48,7 @@ const checkInput = function (input)  {
     if (input.length === 0) {
         // Message for empty input
         message.innerText = "Please enter a letter";
-    } else if (input.legth > 1) {
+    } else if (input.length > 1) {
         // Message for more than one letter
         message.innerText = "Please enter one letter only";
     } else if (!input.match(acceptedLetter)) {
@@ -50,5 +57,16 @@ const checkInput = function (input)  {
     } else {
         // Valid input
         return input;
+    }
+};
+
+// Function to capture input
+const makeGuess = function (guess) {
+    guess = guess.toUpperCase();
+    if (guessedLettersArray.includes (guess)) {
+        message.innerText = "Woops! You've already guessed that letter. Let's give it another go.";
+    } else {
+        guessedLettersArray.push(guess);
+        console.log(guessedLettersArray);
     }
 };
