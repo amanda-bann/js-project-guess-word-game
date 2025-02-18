@@ -37,7 +37,7 @@ guessButton.addEventListener ("click", function (e) {
         // If the input is a letter, add it to the guessed letters list
         makeGuess(guess);
     }
-    console.log(guess);
+    //console.log(guess);
 
     textInput.value = "";
 });
@@ -68,5 +68,16 @@ const makeGuess = function (guess) {
     } else {
         guessedLettersArray.push(guess);
         console.log(guessedLettersArray);
+    }
+};
+
+// Function to update the page with guessed letters
+const showGuessedLetters = function () {
+    // Clear the list
+    guessedLetters.innerHTML = "";
+    for (const letter of guessedLettersArray) {
+        const li = document.createElement("li");
+        li.innerText = letter;
+        guessedLetters.append(li);
     }
 };
