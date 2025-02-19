@@ -16,6 +16,7 @@ const guessedLettersArray = [];
 const placeholder = function (word) {
     const placeholderLetters = [];
     for (const letter of word) {
+        // console.log(letter);
         placeholderLetters.push("●");
     }
     wordInProgress.innerText = placeholderLetters.join("");
@@ -33,6 +34,7 @@ guessButton.addEventListener ("click", function (e) {
     const guess = textInput.value;
     // Input value check
     const legitGuess = checkInput(guess);
+
     if (legitGuess) {
         // If the input is a letter, add it to the guessed letters list
         makeGuess(guess);
@@ -63,16 +65,18 @@ const checkInput = function (input)  {
 // Function to capture input
 const makeGuess = function (guess) {
     guess = guess.toUpperCase();
-    if (guessedLettersArray.includes (guess)) {
+    if (guessedLettersArray.includes(guess)) {
         message.innerText = "Woops! You've already guessed that letter. Let's give it another go.";
     } else {
         guessedLettersArray.push(guess);
         console.log(guessedLettersArray);
+        showGuessedLettersArray();
+        updateWordInProgress(guessedLettersArray);
     }
 };
 
 // Function to update the page with guessed letters
-const showGuessedLetters = function () {
+const showGuessedLettersArray = function () {
     // Clear the list
     guessedLetters.innerHTML = "";
     for (const letter of guessedLettersArray) {
@@ -81,3 +85,19 @@ const showGuessedLetters = function () {
         guessedLetters.append(li);
     }
 };
+
+// Function to update the word in progress
+const updateWordInProgress = function (guessedLettersArray) {
+    const wordUpper = word.toUpperCase();
+    const wordArray = wordUpper.split("");
+    const revealWord = [];
+    for(const letter of wordArray){
+        if (guessedLettersArray.includes(letter)){
+        revealWord.push(letter.toUpperCase());
+        } else {
+        revealWord.push("●");
+        }
+    }
+    console.log(revealWord);
+    wordInProgress.innerText = revealWord.join("");
+}
