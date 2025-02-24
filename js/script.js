@@ -2,14 +2,15 @@ const guessedLetters = document.querySelector(".guessed-letters");
 const guessButton = document.querySelector(".guess");
 const textInput = document.querySelector(".letter");
 const wordInProgress = document.querySelector(".word-in-progress");
-const remainingGuesses = document.querySelector(".remaining");
+const remainingGuessesDisplay = document.querySelector(".remaining");
 const remainingGuessesSpan = document.querySelector(".remaining span");
 const message = document.querySelector(".message");
 const playAgainButton = document.querySelector(".play-again");
 
 // Initial word to test the game
-const word = "magnolia";
+let word = "magnolia";
 const guessedLettersArray = [];
+let remainingGuesses = 8;
 
 
 // Function to display the symbols as placeholders for the chosen word's letters
@@ -70,6 +71,7 @@ const makeGuess = function (guess) {
     } else {
         guessedLettersArray.push(guess);
         console.log(guessedLettersArray);
+        countGuesses(guess);
         showGuessedLettersArray();
         updateWordInProgress(guessedLettersArray);
     }
@@ -97,11 +99,32 @@ const updateWordInProgress = function (guessedLettersArray) {
         } else {
         revealWord.push("●");
         }
-    }
+    }   
     console.log(revealWord);
     wordInProgress.innerText = revealWord.join("");
+    // Call the function to check if the player has won
     checkWin();
 };
+
+// Function to count remaining guesses
+const countGuesses = function (guess) {
+    const wordUpper = word.toUpperCase();
+    if(!wordUpper.includes(guess)){
+        message.innerText = `Sorry, the word has no ${guess}`;
+        remainingGuesses -= 1;
+    } else {
+        message.innerText = `Nice! The word does have the letter ${guess}`;
+    }
+
+    if (remainingGuesses === 0) {
+        message.innerHTML = `Game over!! The word was <span class="highlight">${word}</span>`;
+    } else if (remainingGuesses === 1) {
+        remainingGuessesSpan.innerText = `${remainingGuesses} guess`;
+    } else {
+        remainingGuessesSpan.innerText = `${remainingGuesses} guesses`;
+    }
+};
+
 
 // Function to check if the player has won
 const checkWin = function () {
