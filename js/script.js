@@ -13,6 +13,21 @@ const guessedLettersArray = [];
 let remainingGuesses = 8;
 
 
+// Function to fetch words from the API
+const getWord = async function () {
+    const reponse = await fetch ("https://gist.githubusercontent.com/skillcrush-curriculum/7061f1d4d3d5bfe47efbfbcfe42bf57e/raw/5ffc447694486e7dea686f34a6c085ae371b43fe/words.txt");
+    const words = await reponse.text();
+    const wordArray = words.split("\n");
+    // console.log(wordArray);
+    const randomIndex = Math.floor(Math.random() * wordArray.length);
+    word = wordArray[randomIndex].trim();
+    placeholder(word);
+};
+
+// Call the function to start the game
+getWord();
+
+
 // Function to display the symbols as placeholders for the chosen word's letters
 const placeholder = function (word) {
     const placeholderLetters = [];
