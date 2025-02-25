@@ -26,8 +26,6 @@ const getWord = async function () {
 
 // Call the function to start the game
 getWord();
-
-
 // Function to display the symbols as placeholders for the chosen word's letters
 const placeholder = function (word) {
     const placeholderLetters = [];
@@ -38,7 +36,7 @@ const placeholder = function (word) {
     wordInProgress.innerText = placeholderLetters.join("");
 };
 
-placeholder(word);
+// placeholder(word);
 
 // Event listener for Guess! button
 guessButton.addEventListener ("click", function (e) {
