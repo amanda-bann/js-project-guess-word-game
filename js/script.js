@@ -9,7 +9,7 @@ const playAgainButton = document.querySelector(".play-again");
 
 // Initial word to test the game
 let word = "magnolia";
-const guessedLettersArray = [];
+let guessedLettersArray = [];
 let remainingGuesses = 8;
 
 
@@ -156,4 +156,23 @@ const checkWin = function () {
     remainingGuessesDisplay.classList.add("hide");
     guessedLetters.classList.add("hide");
     playAgainButton.classList.remove("hide");
- }
+ };
+
+ // Reset the game
+ playAgainButton.addEventListener("click", function(){
+    // Reset all original values
+    message.classList.remove("win");
+    guessedLettersArray = [];
+    remainingGuesses = 8;
+    remainingGuessesSpan.innerText = `${remainingGuesses} guesses`;
+    guessedLetters.innerHTML = "";
+    message.innerText = "";
+    // Call the function to fetch a new word
+    getWord();
+
+    // Show the UI elements for new game
+    guessButton.classList.remove("hide");
+    playAgainButton.classList.add("hide");
+    remainingGuessesDisplay.classList.remove("hide");
+    guessedLetters.classList.remove("hide");
+ });
