@@ -131,6 +131,7 @@ const countGuesses = function (guess) {
 
     if (remainingGuesses === 0) {
         message.innerHTML = `Game over!! The word was <span class="highlight">${word}</span>`;
+        startOver();
     } else if (remainingGuesses === 1) {
         remainingGuessesSpan.innerText = `${remainingGuesses} guess`;
     } else {
@@ -144,5 +145,15 @@ const checkWin = function () {
     if (word.toUpperCase() === wordInProgress.innerText) {
         message.classList.add("win");
         message.innerHTML = `<p class="highlight">You guessed the correct word! Congrats!</p>`;
+
+        startOver();
     }
 };
+
+// Play again button
+ const startOver = function (){
+    guessButton.classList.add("hide");
+    remainingGuessesDisplay.classList.add("hide");
+    guessedLetters.classList.add("hide");
+    playAgainButton.classList.remove("hide");
+ }
